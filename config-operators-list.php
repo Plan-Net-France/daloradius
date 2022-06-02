@@ -31,7 +31,7 @@
 	isset($_REQUEST['orderBy']) ? $orderBy = $_REQUEST['orderBy'] : $orderBy = "id";
 	isset($_REQUEST['orderType']) ? $orderType = $_REQUEST['orderType'] : $orderType = "asc";
 
-	
+
     include_once('library/config_read.php');
     $log = "visited page: ";
     $logQuery = "performed query for listing of records on page: ";
@@ -57,10 +57,10 @@
 ?>
 
 		<div id="contentnorightbar">
-		
+
 				<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','configoperatorslist.php') ?>
 				<h144>&#x2754;</h144></a></h2>
-				
+
                 <div id="helpPage" style="display:none;visibility:visible" >
 					<?php echo t('helpPage','configoperatorslist') ?>
 					<br/>
@@ -71,19 +71,19 @@
 
     include 'library/opendb.php';
 	include 'include/management/pages_numbering.php';		// must be included after opendb because it needs to read the CONFIG_IFACE_TABLES_LISTING variable from the config file
-	
+
 	//orig: used as maethod to get total rows - this is required for the pages_numbering.php page
 	$sql = "SELECT id, username, firstname, lastname, title FROM ".$configValues['CONFIG_DB_TBL_DALOOPERATORS'];
 	$res = $dbSocket->query($sql);
 	$logDebugSQL .= $sql . "\n";
-	
+
 	$numrows = $res->numRows();
 
 
 	/* we are searching for both kind of attributes for the password, being User-Password, the more
 	   common one and the other which is Password, this is also done for considerations of backwards
 	   compatibility with version 0.7        */
-	
+
 	$sql = "SELECT id, username, password, firstname, lastname, title FROM ".$configValues['CONFIG_DB_TBL_DALOOPERATORS'].
 			" ORDER BY $orderBy $orderType LIMIT $offset, $rowsPerPage";
 	$res = $dbSocket->query($sql);
@@ -94,7 +94,7 @@
 	/* END */
 
 	echo "<form name='listoperators' method='post' action='config-operators-del.php' >";
-	
+
 	echo "<table border='0' class='table1'>\n";
 	echo "
 					<thead>
@@ -134,13 +134,6 @@
 			<img src='images/icons/arrow_down.png' alt='<' border='0' /></a>
 		</th>
 		<th scope='col'>
-		<a class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=Value&orderType=asc\">
-			<img src='images/icons/arrow_up.png' alt='>' border='0' /></a>
-		".t('all','Password')." 
-		<a class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=Value&orderType=desc\">
-			<img src='images/icons/arrow_down.png' alt='<' border='0' /></a>
-		</th>
-		<th scope='col'>
 		<a class='novisit' href=\"" . $_SERVER['PHP_SELF'] . "?orderBy=lastname&orderType=asc\">
 			<img src='images/icons/arrow_up.png' alt='>' border='0' /></a>
 		Full name
@@ -161,20 +154,13 @@
 
 		if ( ($row[4] == "") && ($row[3] == "") )
 			$fullname = "";
-		else 
+		else
 			$fullname = "$row[4], $row[3]";
 
 		echo "<tr>
 			<td> <input type='checkbox' name='operator_username[]' value='$row[1]'>$row[0]</td>
 			<td> <a class='tablenovisit' href='config-operators-edit.php?operator_username=$row[1]' title='".
 			t('Tooltip','UserEdit')."'>$row[1]</a> </td>
-			";
-                if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes") {
-                        echo "<td>[Password is hidden]</td>";
-                } else {
-                        echo "<td>$row[2]</td>";
-                }
-                echo "
 			<td>$fullname</td>
 			<td>$row[5]</td>
 
@@ -192,27 +178,27 @@
                                                         </tr>
                                         </tfoot>
                 ";
-	
+
 	echo "</table>";
 	include 'library/closedb.php';
-	
+
 ?>
 
 
 <?php
 	include('include/config/logging.php');
-?>	
+?>
 		</div>
-		
+
 		<div id="footer">
-		
+
 								<?php
         include 'page-footer.php';
 ?>
 
-		
+
 		</div>
-		
+
 </div>
 </div>
 

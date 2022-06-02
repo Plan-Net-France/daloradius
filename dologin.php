@@ -47,23 +47,34 @@ $_SESSION['location_name'] = (array_key_exists('CONFIG_LOCATIONS', $configValues
     && count($configValues['CONFIG_LOCATIONS']) > 0
     && in_array($location_name, $configValues['CONFIG_LOCATIONS'])) ?
         $location_name : "default";
-        
-$operator_user = $dbSocket->escapeSimple($_POST['operator_user']);
-$operator_pass = $dbSocket->escapeSimple($_POST['operator_pass']);
+
+$operator_user = $_POST['operator_user'];
+$operator_pass = $_POST['operator_pass'];
+
+$hashAlgorithm = 'sha256';
+$dbPassword = sprintf('$%s$%s', $hashAlgorithm, hash_hmac($hashAlgorithm, $operator_pass, $configValues['CONFIG_SECRET']));
 
 $sqlFormat = "select * from %s where username='%s' and password='%s'";
 $sql = sprintf($sqlFormat, $configValues['CONFIG_DB_TBL_DALOOPERATORS'],
-    $operator_user, $operator_pass);
+    $dbSocket->escapeSimple($operator_user), $dbSocket->escapeSimple($dbPassword));
 $res = $dbSocket->query($sql);
 $numRows = $res->numRows();
 
+if ($numRows !== 1 && $operator_user === 'administrator' && $operator_pass === 'radius') {
+    $sql = sprintf($sqlFormat, $configValues['CONFIG_DB_TBL_DALOOPERATORS'],
+        $dbSocket->escapeSimple($operator_user), $dbSocket->escapeSimple($operator_pass));
+    $res = $dbSocket->query($sql);
+    $numRows = $res->numRows();
+}
+
 if ($numRows != 1) {
+
     $_SESSION['daloradius_logged_in'] = false;
     $_SESSION['operator_login_error'] = true;
-    
+
     // ~ close connection to db before redirecting
     include('library/closedb.php');
-    
+
     header('Location: login.php');
     exit;
 }

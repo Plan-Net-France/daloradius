@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *********************************************************************************************************
  * daloRADIUS - RADIUS Web Platform
@@ -37,7 +37,7 @@
 
 			$currDate = date('Y-m-d H:i:s');
 			$currBy = $_SESSION['operator_user'];
-			
+
 			(isset($_POST['password'])) ? $operator_password = $_POST['password'] : $operator_password = "";
 			(isset($_POST['firstname'])) ? $firstname = $_POST['firstname'] : $firstname = "";
 			(isset($_POST['lastname'])) ? $lastname = $_POST['lastname'] : $lastname = "";
@@ -51,11 +51,14 @@
 			(isset($_POST['messenger1'])) ? $messenger1 = $_POST['messenger1'] : $messenger1 = "";
 			(isset($_POST['messenger2'])) ? $messenger2 = $_POST['messenger2'] : $messenger2 = "";
 			(isset($_POST['notes'])) ? $notes = $_POST['notes'] : $notes = "";
-			
+
+			$hashAlgorithm = 'sha256';
+			$dbPassword = sprintf('$%s$%s', $hashAlgorithm, hash_hmac($hashAlgorithm, $operator_password, $configValues['CONFIG_SECRET']));
+
 			// update username and password of operator into the database
 			$sql = "UPDATE ".$configValues['CONFIG_DB_TBL_DALOOPERATORS'].
 				" SET ".
-				"password='".$dbSocket->escapeSimple($operator_password)."', ".
+				(!empty($operator_password) ? ("password='".$dbSocket->escapeSimple($dbPassword)."', ") : '').
 				"firstname='".$dbSocket->escapeSimple($firstname)."', ".
 				"lastname='".$dbSocket->escapeSimple($lastname)."', ".
 				"title='".$dbSocket->escapeSimple($title)."', ".
@@ -76,32 +79,32 @@
 					$operator_username."'";
 			$res = $dbSocket->query($sql);
 			$logDebugSQL .= $sql . "\n";
-			
+
 			if ($res->numRows() == 1) {
-				
+
 				$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
 				$curr_operator_id = $row['id'];
-			
+
 				// insert operators acl for this operator
 				foreach ($_POST as $field => $value ) {
-					
+
 					if ( preg_match('/^ACL_/', $field) ) {
 						$access = $value;
 						$file = substr($field, 4);
-						
+
 						$sql = "SELECT id FROM ".$configValues['CONFIG_DB_TBL_DALOOPERATORS_ACL'].
 								" WHERE operator_id='".$curr_operator_id."'".
 								" AND file='$file'";
 						$res = $dbSocket->query($sql);
 						$logDebugSQL .= $sql . "\n";
-						
+
 						if ($res->numRows() == 0) {
 							$sql = "INSERT INTO  ".$configValues['CONFIG_DB_TBL_DALOOPERATORS_ACL'].
 								" ( operator_id, file, access ) VALUES ".
 								" ( '$curr_operator_id', '$file', '$access') ";
 							$res = $dbSocket->query($sql);
 							$logDebugSQL .= $sql . "\n";
-							
+
 						} else {
 							$sql = "UPDATE ".$configValues['CONFIG_DB_TBL_DALOOPERATORS_ACL']." SET ".
 								" access='$access' ".
@@ -109,13 +112,13 @@
 							$res = $dbSocket->query($sql);
 							$logDebugSQL .= $sql . "\n";
 						}
-						
+
 					}
-			
+
 				} // foreach
-			
+
 			} //if numrows()
-			
+
 			$successMsg = "Updated settings for: <b> $operator_username </b>";
 			$logAction .= "Successfully updated settings for operator user [$operator_username] on page: ";
 
@@ -137,7 +140,7 @@
 		$failureMsg = "no operator user was entered, please specify an operator username to edit";
 	}
 
-	
+
 
 	/* fill-in all the operator settings */
 
@@ -147,7 +150,7 @@
 
 	$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
 	$curr_operator_id = $row['id'];
-	$operator_password = $row['password'];
+	$operator_password = '';
 	$operator_firstname = $row['firstname'];
 	$operator_lastname = $row['lastname'];
 	$operator_title = $row['title'];
@@ -188,18 +191,18 @@
 <?php
         include_once ("library/tabber/tab-layout.php");
 ?>
- 
+
 <?php
 
 	include ("menu-config-operators.php");
-	
+
 ?>
-		
+
 		<div id="contentnorightbar">
-		
+
 				<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','configoperatorsedit.php') ?>
 				<h144>&#x2754;</h144></a></h2>
-				
+
                 <div id="helpPage" style="display:none;visibility:visible" >
 					<?php echo t('helpPage','configoperatorsedit') ?>
 					<br/>
@@ -216,7 +219,7 @@
      <div class="tabbertab" title="Operator Info">
 
 	<fieldset>
-	
+
 		<h302> Operator Settings </h302>
 		<br/>
 
@@ -225,7 +228,7 @@
 		<?php
 			if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes")
 				echo "type='password'";
-			else 
+			else
 				echo "type='text'";
 		?>
 			value='<?php if (isset($operator_password)) echo $operator_password ?>' tabindex=101 />
@@ -262,7 +265,7 @@
 
 	<input type='submit' name='submit' value='<?php echo t('buttons','apply') ?>' class='button' />
 	</fieldset>
-	
+
 	</div>
 </div>
 
@@ -270,18 +273,18 @@
 
 <?php
 	include('include/config/logging.php');
-?>				
+?>
 		</div>
-		
+
 		<div id="footer">
-		
+
 								<?php
         include 'page-footer.php';
 ?>
 
-		
+
 		</div>
-		
+
 </div>
 </div>
 

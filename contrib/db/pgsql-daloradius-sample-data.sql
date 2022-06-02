@@ -152,7 +152,7 @@ create index realmgroup_RealmName on realmgroup (RealmName);
 
 /*
  * Table structure for table 'realms'
- * This is not yet used by FreeRADIUS 
+ * This is not yet used by FreeRADIUS
  */
 CREATE TABLE realms (
 	id		SERIAL PRIMARY KEY,
@@ -201,13 +201,13 @@ CREATE TABLE hotspots (
   id BIGSERIAL PRIMARY KEY,
   name varchar(32),
   mac varchar(32),
-  geocode varchar(128) 
-); 
+  geocode varchar(128)
+);
 
 CREATE TABLE operators (
   id BIGSERIAL PRIMARY KEY,
   username varchar(32),
-  password varchar(32) 
+  password varchar(128)
 );
 
 INSERT INTO operators VALUES (1,'administrator','radius');
@@ -216,7 +216,7 @@ CREATE TABLE rates (
   id BIGSERIAL PRIMARY KEY,
   type varchar(32),
   cardbank float,
-  rate float 
+  rate float
 );
 
 
