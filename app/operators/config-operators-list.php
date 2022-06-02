@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *********************************************************************************************************
  * daloRADIUS - RADIUS Web Platform
@@ -38,16 +38,10 @@
     $_SESSION['PREV_LIST_PAGE'] = $_SERVER['REQUEST_URI'];
 
     $cols = array(
-                    "id" => t('all','ID'), 
+                    "id" => t('all','ID'),
                     "username" => t('all','Username')
                  );
-    
-    if (strtolower($configValues['CONFIG_IFACE_PASSWORD_HIDDEN']) === "yes") {
-        $cols[] = t('all','Password');
-    } else {
-        $cols["auth"] = t('all','Password');
-    }
-    
+
     $cols["fullname"] = "Full name";
     $cols["title"] = "Title";
     
@@ -67,7 +61,7 @@
                   in_array(strtolower($_GET['orderType']), array( "desc", "asc" )))
                ? strtolower($_GET['orderType']) : "desc";
 
-    // print HTML prologue    
+    // print HTML prologue
     $title = t('Intro','configoperatorslist.php');
     $help = t('helpPage','configoperatorslist');
     
@@ -98,7 +92,7 @@
         /* END */
         
         // we execute and log the actual query
-        $sql = sprintf("SELECT id, username, password AS auth, CONCAT(firstname, ' ', lastname) AS fullname, title
+        $sql = sprintf("SELECT id, username, CONCAT(firstname, ' ', lastname) AS fullname, title
                           FROM %s", $configValues['CONFIG_DB_TBL_DALOOPERATORS']);
         $sql .= sprintf(" ORDER BY %s %s LIMIT %s, %s", $orderBy, $orderType, $offset, $rowsPerPage);
         $res = $dbSocket->query($sql);
@@ -106,7 +100,7 @@
         
         $per_page_numrows = $res->numRows();
         
-        // this can be passed as form attribute and 
+        // this can be passed as form attribute and
         // printTableFormControls function parameter
         $action = "config-operators-del.php";
         
@@ -145,11 +139,7 @@
                 $row[$i] = htmlspecialchars($row[$i], ENT_QUOTES, 'UTF-8');
             }
             
-            list($id, $username, $auth, $fullname, $title) = $row;
-            
-            if (strtolower($configValues['CONFIG_IFACE_PASSWORD_HIDDEN']) === "yes") {
-                $auth = "[Password is hidden]";
-            }
+            list($id, $username, $fullname, $title) = $row;
             
             // preparing checkboxes and tooltips stuff
             $tooltip = array(

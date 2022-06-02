@@ -91,12 +91,16 @@
                 $messenger2 = (array_key_exists('messenger2', $_POST) && isset($_POST['messenger2'])) ? trim($_POST['messenger2']) : "";
                 $notes = (array_key_exists('notes', $_POST) && isset($_POST['notes'])) ? trim($_POST['notes']) : "";
                 
+                $hashAlgorithm = 'sha256';
+                $dbPassword = sprintf('$%s$%s', $hashAlgorithm, hash_hmac($hashAlgorithm, $operator_password, $configValues['CONFIG_SECRET']));
+
                 // update operator data into the database
-                $sql = sprintf("UPDATE %s SET password='%s', firstname='%s', lastname='%s', title='%s', department='%s',
+                $sql = sprintf("UPDATE %s SET %sfirstname='%s', lastname='%s', title='%s', department='%s',
                                               company='%s', phone1='%s', phone2='%s', email1='%s', email2='%s', messenger1='%s',
                                               messenger2='%s', updatedate='%s', updateby='%s'
                                  WHERE username='%s'",
-                               $configValues['CONFIG_DB_TBL_DALOOPERATORS'], $dbSocket->escapeSimple($operator_password),
+                               $configValues['CONFIG_DB_TBL_DALOOPERATORS'],
+                               (!empty($operator_password) ? sprintf('password=\'%s\', ', $dbSocket->escapeSimple($dbPassword)) : ''),
                                $dbSocket->escapeSimple($firstname), $dbSocket->escapeSimple($lastname), $dbSocket->escapeSimple($title),
                                $dbSocket->escapeSimple($department), $dbSocket->escapeSimple($company), $dbSocket->escapeSimple($phone1),
                                $dbSocket->escapeSimple($phone2), $dbSocket->escapeSimple($email1), $dbSocket->escapeSimple($email2),
@@ -124,7 +128,7 @@
                     
                     if ($numrows > 0) {
                         $sql = sprintf("UPDATE %s SET access='%s'
-                                         WHERE file='%s' AND operator_id=%d", 
+                                         WHERE file='%s' AND operator_id=%d",
                                        $configValues['CONFIG_DB_TBL_DALOOPERATORS_ACL'],
                                        $dbSocket->escapeSimple($access),
                                        $dbSocket->escapeSimple($file), $curr_operator_id);
@@ -157,7 +161,7 @@
     } else {
         /* fill-in all the operator settings */
 
-        $sql = sprintf("SELECT id, password, firstname, lastname, title, department, company, phone1, phone2,
+        $sql = sprintf("SELECT id, firstname, lastname, title, department, company, phone1, phone2,
                                email1, email2, messenger1, messenger2, notes, lastlogin,
                                creationdate, creationby, updatedate, updateby
                           FROM %s
@@ -167,7 +171,7 @@
         $logDebugSQL .= "$sql;\n";
         
         list(
-                $curr_operator_id, $operator_password, $operator_firstname, $operator_lastname,
+                $curr_operator_id, $operator_firstname, $operator_lastname,
                 $operator_title, $operator_department, $operator_company, $operator_phone1, $operator_phone2,
                 $operator_email1, $operator_email2, $operator_messenger1, $operator_messenger2, $operator_notes,
                 $operator_lastlogin, $operator_creationdate, $operator_creationby, $operator_updatedate, $operator_updateby
@@ -175,9 +179,6 @@
     }
 
     include('../common/includes/db_close.php');
-
-    $hiddenPassword = (strtolower($configValues['CONFIG_IFACE_PASSWORD_HIDDEN']) == "yes")
-                    ? 'password' : 'text';
 
     include_once("lang/main.php");
     
@@ -197,7 +198,7 @@
 
     if (!empty($operator_username_enc)) {
         $title .= " :: $operator_username_enc";
-    } 
+    }
 
     print_title_and_help($title, $help);
     
@@ -226,8 +227,8 @@
                                         "id" => "operator_password",
                                         "name" => "operator_password",
                                         "caption" => t('all','Password'),
-                                        "type" => $hiddenPassword,
-                                        "value" => ((isset($operator_password)) ? $operator_password : ""),
+                                        "type" => 'password',
+                                        "value" => '',
                                         "random" => true
                                      );
                                   

@@ -20,7 +20,7 @@
  *
  *********************************************************************************************************
  */
- 
+
     include("library/checklogin.php");
     $operator = $_SESSION['operator_user'];
 
@@ -85,14 +85,29 @@
                     $currDate = date('Y-m-d H:i:s');
                     $currBy = $_SESSION['operator_user'];
 
+                    $hashAlgorithm = 'sha256';
+                    $dbPassword = sprintf('$%s$%s', $hashAlgorithm, hash_hmac($hashAlgorithm, $operator_password, $configValues['CONFIG_SECRET']));
+
                     // insert username and password of operator into the database
                     $sql = sprintf("INSERT INTO %s (id, username, password, firstname, lastname, title, department, company,
                                                     phone1, phone2, email1, email2, messenger1, messenger2, notes, creationdate,
                                                     creationby, updatedate, updateby)
                                             VALUES (0, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
                                                     '%s', '%s', '%s', '%s', NULL, NULL)", $configValues['CONFIG_DB_TBL_DALOOPERATORS'],
-                                   $operator_username, $operator_password, $firstname, $lastname, $title, $department, $company,
-                                   $phone1, $phone2, $email1, $email2, $messenger1, $messenger2, $notes, $currDate, $currBy);
+                                   $dbSocket->escapeSimple($operator_username),
+                                   $dbSocket->escapeSimple($dbPassword),
+                                   $dbSocket->escapeSimple($firstname),
+                                   $dbSocket->escapeSimple($lastname),
+                                   $dbSocket->escapeSimple($title),
+                                   $dbSocket->escapeSimple($department),
+                                   $dbSocket->escapeSimple($company),
+                                   $dbSocket->escapeSimple($phone1),
+                                   $dbSocket->escapeSimple($phone2),
+                                   $dbSocket->escapeSimple($email1),
+                                   $dbSocket->escapeSimple($email2),
+                                   $dbSocket->escapeSimple($messenger1),
+                                   $dbSocket->escapeSimple($messenger2),
+                                   $dbSocket->escapeSimple($notes), $currDate, $currBy);
                     $res = $dbSocket->query($sql);
                     $logDebugSQL .= "$sql;\n";
 
@@ -165,10 +180,6 @@
             $logAction .= "$failureMsg on page: ";
         }
     } // if form was submitted
-    
-    $hiddenPassword = (strtolower($configValues['CONFIG_IFACE_PASSWORD_HIDDEN']) == "yes")
-                    ? 'password' : 'text';
-    
 
     // print HTML prologue
     $extra_css = array();
@@ -202,8 +213,8 @@
                                         "id" => "operator_password",
                                         "name" => "operator_password",
                                         "caption" => t('all','Password'),
-                                        "type" => $hiddenPassword,
-                                        "value" => ((isset($operator_password)) ? $operator_password : ""),
+                                        "type" => 'password',
+                                        "value" => '',
                                         "random" => true
                                      );
         

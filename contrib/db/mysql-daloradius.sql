@@ -10108,7 +10108,7 @@ SET character_set_client = utf8mb4;
 CREATE TABLE `operators` (
   `id` INT(32) NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(32) NOT NULL,
-  `password` VARCHAR(32) NOT NULL,
+  `password` VARCHAR(128) NOT NULL,
   `firstname` VARCHAR(32) NOT NULL,
   `lastname` VARCHAR(32) NOT NULL,
   `title` VARCHAR(32) NOT NULL,
