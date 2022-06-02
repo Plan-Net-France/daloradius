@@ -224,14 +224,7 @@
 		<br/>
 
                 <label for='operator_password' class='form'>Operator Password</label>
-                <input name='password' id='password'
-		<?php
-			if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes")
-				echo "type='password'";
-			else
-				echo "type='text'";
-		?>
-			value='<?php if (isset($operator_password)) echo $operator_password ?>' tabindex=101 />
+                <input name='password' id='password' value='password' tabindex=101 />
                 <br/>
 
                 <br/><br/>
