@@ -174,13 +174,13 @@ EOF;
 
 
     echo '<script>' . "\n";
-    
+
     // ...along with the javascript code
     // for initing tooltips
     if (!empty($inline_extra_js)) {
         echo $inline_extra_js . "\n";
     }
-    
+
 
     echo <<<EOF
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')),
@@ -350,7 +350,7 @@ EOF;
         foreach ($descriptor['actions'] as $actions) {
             $result .= sprintf('<li><a class="dropdown-item" href="%s">%s</a></li>', $actions['href'], $actions['label']);
         }
-        
+
         if (isset($descriptor['ajax_id']) || isset($descriptor['content'])) {
             $result .= '<li><hr class="dropdown-divider"></li>';
         }
@@ -483,22 +483,22 @@ function print_simple_table($table) {
         echo '<div class="col-8 offset-2">';
         printf('<h5>%s</h5>', $table['title']);
         echo '<table class="table table-striped">';
-        
+
         foreach ($table['rows'] as $row) {
             list($key, $value) = $row;
-            
+
             echo '<tr class="row">';
             printf('<th scope="row" class="col-6 text-end">%s</th>', $key);
             printf('<td class="col-6 text-start">%s</td>', $value);
             echo '</tr>';
         }
-        
+
         echo '</table>';
-        
+
         echo '</div></div>';
-        
+
     }
-    
+
 }
 
 
@@ -614,7 +614,7 @@ function print_table_row($table_row) {
                             //~ "onclick" => "javascript:..."
                             //~ "checked" => true (type=checkbox specific)
                          //~ );
-                         
+
 
 function print_input_field($input_descriptor) {
     global $configValues;
@@ -737,9 +737,9 @@ function print_input_field($input_descriptor) {
     echo '>';
 
     if (array_key_exists('random', $input_descriptor) && $input_descriptor['random']) {
-        $onclick = sprintf("randomAlphanumeric('%s', 8, '%s')",
-                           $input_descriptor['id'], $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS']);
-        
+        $onclick = sprintf("randomAlphanumeric('%s', 16, '%s')",
+                           $input_descriptor['id'], $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2']);
+
         echo '<span class="input-group-text"><button class="btn btn-link btn-sm" type="button"';
         printf(' onclick="%s" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Random">', $onclick);
         echo '<i class="bi bi-shuffle"></i>'
@@ -944,51 +944,51 @@ function print_edit_attribute($descriptor) {
     global $valid_ops;
 
     echo '<div class="d-flex flex-row justify-content-center align-items-center gap-2 my-1">';
-    
+
     echo '<div>';
     printf('<a href="#" onclick="%s">', $descriptor['onclick']);
     echo '<i class="bi bi-x-circle-fill text-danger me-2"></i></a>';
     printf('<strong>%s</strong>', $descriptor['attribute']);
     echo '</div>';
-                
+
     echo '<div class="flex-fill">';
-    printf('<input type="hidden" name="%s" value="%s">', $descriptor['name'], $descriptor['id__attribute']);            
+    printf('<input type="hidden" name="%s" value="%s">', $descriptor['name'], $descriptor['id__attribute']);
     printf('<input class="form-control" type="%s" value="%s" name="%s">', $descriptor['type'], $descriptor['value'], $descriptor['name']);
     echo '</div>';
-                
+
     echo '<div>';
     printf('<select name="%s" class="form-select">', $descriptor['name']);
-    
+
     foreach ($valid_ops as $op) {
         $selected = ($op == $descriptor['selected_option']) ? " selected" : "";
         printf('<option value="%s"%s>%s</option>', $op, $selected, $op);
     }
     echo '</select>';
     echo '</div>';
-                
+
     printf('<input type="hidden" name="%s" value="%s">', $descriptor['name'], $descriptor['table']);
-                
+
     if (isset($descriptor['attr_type']) || isset($descriptor['attr_desc'])) {
         $tooltipText = "";
-        
+
         $descriptor['attr_type'] = strip_tags(trim($descriptor['attr_type']));
         $descriptor['attr_desc'] = strip_tags(trim($descriptor['attr_desc']));
-        
+
         if (!empty($descriptor['attr_type'])) {
             $tooltipText .= sprintf('Type: %s.', strip_tags($descriptor['attr_type']));
         }
-                
+
         if (!empty($descriptor['attr_desc'])) {
             $tooltipText .= sprintf("\n" . 'Tooltip Description: %s.', $descriptor['attr_desc']);
         }
-                
+
         if (!empty(trim($tooltipText))) {
             echo '<div>';
             printf('<i class="bi bi-info-circle-fill" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="%s"></i>', $tooltipText);
             echo '</div>';
         }
     }
-                
+
     echo '</div><!-- .row -->';
 }
 
@@ -997,36 +997,36 @@ function print_button($descriptor) {
     if (!array_key_exists('id', $descriptor) || empty($descriptor['id'])) {
         $descriptor['id'] = $descriptor['name'];
     }
-    
+
     $class = (isset($descriptor['class'])) ? trim($descriptor['class']) : "btn-primary";
     $type = (isset($descriptor['type'])) ? strtolower(trim($descriptor['type'])) : "button";
     //~ $icon = (isset($descriptor['icon'])) ? trim($descriptor['icon']) : "save-fill";
-    
+
     echo '<div class="my-3';
-    
+
     if ($type === "submit" || (isset($descriptor['large']) && $descriptor['large'])) {
         echo ' d-grid';
     }
-    
+
     echo '">';
-    
+
     printf('<button type="%s" class="btn %s"', $type, $class);
     if (isset($descriptor['onclick'])) {
         printf(' onclick="%s"', trim($descriptor['onclick']));
     }
     echo '>';
-    
+
     if (isset($descriptor['icon'])) {
         printf('<i class="bi bi-%s mx-1"></i>', trim($descriptor['icon']));
     }
-    
+
     if (isset($descriptor['value'])) {
         echo trim($descriptor['value']);
     }
-    
+
     echo '</button>';
     echo '</div>';
-    
+
 }
 
 // this wrapper function tries to call the right function
@@ -1054,13 +1054,13 @@ function print_form_component($descriptor) {
 
     if (array_key_exists('tooltipText', $descriptor) && !empty($descriptor['tooltipText']) &&
         (!array_key_exists('sidebar', $descriptor) || $descriptor['sidebar'] === false)) {
-        
+
         $tooltip_box_id = sprintf('%s-%d-tooltip', $descriptor['id'], rand());
         $describedby_id = $descriptor['id'] .  '-help';
-        
+
         $tooltipText = preg_replace('/\n/', '', strip_tags(html_entity_decode($descriptor['tooltipText'])));
         $tooltipText = preg_replace('/\s+/', ' ', trim($tooltipText));
-        
+
         printf('<div id="%s" class="form-text">%s</div>', $describedby_id, $tooltipText);
     }
 
@@ -1479,10 +1479,10 @@ function print_tab_navbuttons($button_descriptors) {
 
 
 function print_tab_header($keywords=array(), $active=0) {
-    
+
     if (is_array($keywords) && count($keywords) > 0) {
         echo '<ul class="nav nav-tabs" role="tablist">';
-        
+
         $count = 0;
         foreach ($keywords as $key) {
             if (is_array($key)) {
@@ -1494,11 +1494,11 @@ function print_tab_header($keywords=array(), $active=0) {
                 $button_id = strtolower("$key-button");
                 $button_caption = t('title', $key);
             }
-            
+
             $onclick = sprintf("openTab(event, '%s')", $tab_id);
             $active_class = ($count == $active) ? ' active' : "";
             $active_elem = ($count == $active) ? ' aria-selected="true"' : "";
-            
+
             echo '<li class="nav-item" role="presentation">';
             echo '<button type="button" role="tab" data-bs-toggle="tab"';
             printf(' class="nav-link%s" id="%s" data-bs-target="#%s" aria-controls="%s"%s>%s</button>',
@@ -1507,7 +1507,7 @@ function print_tab_header($keywords=array(), $active=0) {
 
             $count++;
         }
-        
+
         echo '</ul>' . "\n";
     }
 }

@@ -63,6 +63,17 @@
                 $invalid_input['CONFIG_USER_ALLOWEDRANDOMCHARS'] = t('all','RandomChars');
             }
 
+            // validate allowed random characters
+            if (
+                    array_key_exists('CONFIG_USER_ALLOWEDRANDOMCHARS2', $_POST) &&
+                    !empty(trim($_POST['CONFIG_USER_ALLOWEDRANDOMCHARS2'])) &&
+                    preg_match(ALLOWED_RANDOM_CHARS_REGEX, trim($_POST['CONFIG_USER_ALLOWEDRANDOMCHARS2'])) !== false
+               ) {
+                $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2'] = trim($_POST['CONFIG_USER_ALLOWEDRANDOMCHARS2']);
+            } else {
+                $invalid_input['CONFIG_USER_ALLOWEDRANDOMCHARS2'] = t('all','RandomChars2');
+            }
+
             if (isset($_POST['CONFIG_DB_PASSWORD_MIN_LENGTH']) && intval($_POST['CONFIG_DB_PASSWORD_MIN_LENGTH']) > 0) {
                 $configValues['CONFIG_DB_PASSWORD_MIN_LENGTH'] = intval($_POST['CONFIG_DB_PASSWORD_MIN_LENGTH']);
 
@@ -122,6 +133,14 @@
                                         "caption" => t('all','RandomChars'),
                                         "name" => 'CONFIG_USER_ALLOWEDRANDOMCHARS',
                                         "value" => $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'],
+                                        "pattern" => trim(ALLOWED_RANDOM_CHARS_REGEX, "/")
+                                     );
+
+    $input_descriptors0[] = array(
+                                        "type" => "text",
+                                        "caption" => t('all','RandomChars2'),
+                                        "name" => 'CONFIG_USER_ALLOWEDRANDOMCHARS2',
+                                        "value" => $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2'],
                                         "pattern" => trim(ALLOWED_RANDOM_CHARS_REGEX, "/")
                                      );
 

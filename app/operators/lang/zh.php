@@ -343,6 +343,7 @@ $l['all']['CreateRandomUsers'] = "创建随机用户";
 $l['all']['StartingIndex'] = "开始索引";
 $l['all']['EndingIndex'] = "结束索引";
 $l['all']['RandomChars'] = "允许随机字符";
+$l['all']['RandomChars2'] = "允许随机字符2";
 $l['all']['Memfree'] = "空闲内存";
 $l['all']['Uptime'] = "正常运行时间";
 $l['all']['BandwidthUp'] = "上传带宽";

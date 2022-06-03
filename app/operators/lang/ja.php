@@ -371,6 +371,7 @@ $l['all']['CreateRandomUsers'] = "ランダム文字でユーザを作る";
 $l['all']['StartingIndex'] = "開始番号";
 $l['all']['EndingIndex'] = "終了番号";
 $l['all']['RandomChars'] = "ランダム許可文字";
+$l['all']['RandomChars2'] = "ランダム許可文字2";
 
 $l['all']['Memfree'] = "メモリ解放";
 $l['all']['Uptime'] = "連続稼働時間";

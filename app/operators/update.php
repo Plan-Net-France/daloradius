@@ -16,7 +16,7 @@
  *********************************************************************************************************
  *
  * Description:    An update/upgrade page to handle the upgrade of the database tables
- * 
+ *
  * Authors:        Liran Tal <liran@enginx.com>
  *                 Filippo Lauria <filippo.lauria@iit.cnr.it>
  *
@@ -1100,7 +1100,7 @@ if (isset($_POST['submit'])) {
             UNLOCK TABLES;
             /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
             ";
-            $res = $dbSocket->query($sql);            
+            $res = $dbSocket->query($sql);
         }
 
         $sql = "
@@ -1662,7 +1662,7 @@ if (isset($_POST['submit'])) {
         $configValues['CONFIG_DB_TBL_RADUSERGROUP'] = 'radusergroup';
         $configValues['CONFIG_DB_TBL_RADHG'] = 'radhuntgroup';
         $configValues['CONFIG_DB_TBL_RADPOSTAUTH'] = 'radpostauth';
-        $configValues['CONFIG_DB_TBL_RADIPPOOL'] = 'radippool';    
+        $configValues['CONFIG_DB_TBL_RADIPPOOL'] = 'radippool';
         
         $configValues['CONFIG_DB_TBL_DALOOPERATORS'] = 'operators';
         $configValues['CONFIG_DB_TBL_DALOOPERATORS_ACL'] = 'operators_acl';
@@ -1762,6 +1762,7 @@ if (isset($_POST['submit'])) {
         $configValues['CONFIG_MAINT_TEST_USER_NASPORT'] = '0';
         $configValues['CONFIG_MAINT_TEST_USER_RADIUSSECRET'] = 'testing123';
         $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] = 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789';
+        $configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2'] = 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789!@#$%^&*';
         $configValues['CONFIG_MAIL_SMTPADDR'] = '127.0.0.1';
         $configValues['CONFIG_MAIL_SMTPPORT'] = '25';
         $configValues['CONFIG_MAIL_SMTPAUTH'] = '';
@@ -1810,7 +1811,7 @@ if (isset($_POST['submit'])) {
 
                                 <h1><a href="index.php"> <img src="static/images/daloradius_small.png" border=0/></a></h1>
                                 <h2>
-                                    Radius Management, Reporting and Accounting by <a href="https://github.com/lirantal/daloradius">Liran Tal</a>                                
+                                    Radius Management, Reporting and Accounting by <a href="https://github.com/lirantal/daloradius">Liran Tal</a>
                                 </h2>
                                 <ul id="nav">
                 <a name='top'></a>
@@ -1920,7 +1921,7 @@ if (isset($_POST['submit'])) {
             <font color="red"><b>Not-installed</b></font>
         <?php endif; ?>
         <br/>
-        </li>    
+        </li>
 
 
                 </ul>
@@ -1937,7 +1938,7 @@ if (isset($_POST['submit'])) {
                 <li class='fieldset'>
                 <label for='name' class='form'>
 
-    <?php 
+    <?php
         /*
         if (isset($missingVersion)) {
             $option = "<option value=\"\">Please select</option>";
@@ -1986,4 +1987,4 @@ if (isset($_POST['submit'])) {
     
     print_footer_and_html_epilogue();
 
-?>    
+?>

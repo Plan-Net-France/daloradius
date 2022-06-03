@@ -341,6 +341,7 @@ $l['all']['CreateRandomUsers'] = "Create Random Users";
 $l['all']['StartingIndex'] = "Starting Index";
 $l['all']['EndingIndex'] = "Ending Index";
 $l['all']['RandomChars'] = "Allowed Random Characters";
+$l['all']['RandomChars2'] = "Allowed Random Characters 2";
 $l['all']['Memfree'] = "Memory Free";
 $l['all']['Uptime'] = "Uptime";
 $l['all']['BandwidthUp'] = "Bandwidth Up";

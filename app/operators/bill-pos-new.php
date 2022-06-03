@@ -38,7 +38,7 @@
     $logAction = "";
     $logDebugSQL = "";
 
-    // if cleartext passwords are not allowed, 
+    // if cleartext passwords are not allowed,
     // we remove Cleartext-Password from the $valid_passwordTypes array
     if (isset($configValues['CONFIG_DB_PASSWORD_ENCRYPTION']) &&
         strtolower(trim($configValues['CONFIG_DB_PASSWORD_ENCRYPTION'])) !== 'yes') {
@@ -356,7 +356,7 @@
                         $res = $dbSocket->query($sql);
                         $row = $res->fetchRow(DB_FETCHMODE_ASSOC);
 
-                        // calculate tax (planTax is the numerical percentage amount) 
+                        // calculate tax (planTax is the numerical percentage amount)
                         $calcTax = (float) ($row['planCost'] * (float)($row['planTax'] / 100) );
                         $invoiceItems[0]['plan_id'] = $row['id'];
                         $invoiceItems[0]['amount'] = $row['planCost'];
