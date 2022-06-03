@@ -22,7 +22,7 @@
  *
  *********************************************************************************************************
  */
- 
+
 $l['all']['daloRADIUS'] = "daloRADIUS " . $configValues['DALORADIUS_VERSION'];
 $l['all']['daloRADIUSVersion'] = "版本 " . $configValues['DALORADIUS_VERSION'];
 $l['all']['copyright1'] = "RADIUS 管理、报告、会计和账单<a href=\"https://github.com/lirantal/daloradius\">Liran Tal</a>";
@@ -333,6 +333,7 @@ $l['all']['CreateRandomUsers'] = "创建随机用户";
 $l['all']['StartingIndex'] = "开始索引";
 $l['all']['EndingIndex'] = "结束索引";
 $l['all']['RandomChars'] = "允许随机字符";
+$l['all']['RandomChars2'] = "允许随机字符2";
 $l['all']['Memfree'] = "空闲内存";
 $l['all']['Uptime'] = "正常运行时间";
 $l['all']['BandwidthUp'] = "上传带宽";
@@ -601,7 +602,7 @@ $l['FormField']['mngradusergroupdel.php']['ToolTip']['Groupname'] = "如果指�
 
 $l['Tooltip']['usernameTooltip'] = "准确的用户名，用户将<br/>&nbsp;&nbsp;&nbsp;
 					用来连接系统";
-$l['Tooltip']['passwordTypeTooltip'] = "The password type used to authenticate the user in Radius.";					
+$l['Tooltip']['passwordTypeTooltip'] = "The password type used to authenticate the user in Radius.";
 $l['Tooltip']['passwordTooltip'] = "密码实例包含在系统里<br/>&nbsp;&nbsp;&nbsp;
 					所以要格外小心";
 $l['Tooltip']['groupTooltip'] = "用户将被添加到这个组<br/>&nbsp;&nbsp;&nbsp;
@@ -825,8 +826,8 @@ $l['button']['RemoveOperator'] = "移除操作人";
 
 $l['button']['ProcessQuery'] = "查询进程";
 
- 
- 
+
+
 /*********************************************************************************** */
 
 
@@ -852,7 +853,7 @@ $l['title']['Items'] = "项目";
 $l['title']['PayTypeInfo'] = "支付类型信息";
 $l['title']['PaymentInfo'] = "支付信息";
 
- 
+
 $l['title']['RateInfo'] = "价格信息";
 $l['title']['PlanInfo'] = "计划信息";
 $l['title']['TimeSettings'] = "时间设置";

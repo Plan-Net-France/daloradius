@@ -361,6 +361,7 @@ $l['all']['CreateRandomUsers'] = "ランダム文字でユーザを作る";
 $l['all']['StartingIndex'] = "開始番号";
 $l['all']['EndingIndex'] = "終了番号";
 $l['all']['RandomChars'] = "ランダム許可文字";
+$l['all']['RandomChars2'] = "ランダム許可文字2";
 
 $l['all']['Memfree'] = "メモリ解放";
 $l['all']['Uptime'] = "連続稼働時間";
@@ -1011,7 +1012,7 @@ $l['title']['Optional'] = "オプション";
 /* ********************************************************************************** */
 
 /* **********************************************************************************
-* Graphs 
+* Graphs
 * General graphing text
 ************************************************************************************/
 $l['graphs']['Day'] = "日";
@@ -1046,7 +1047,7 @@ $l['text']['LoginPlease'] = "ログインしてください";
 
 
 /* **********************************************************************************
-* Contact Info 
+* Contact Info
 * Related to all contact info text, user info, hotspot owner contact information etc
 ************************************************************************************/
 
@@ -1354,7 +1355,7 @@ $l['captions']['detailsofnewrate'] = "新しいレートの詳細を記入する
 $l['captions']['filldetailsofnewrate'] = "新しいレートエントリの詳細を記入してください";
 
 /************************************************************************************
-* Help Pages Info 
+* Help Pages Info
 * Each page has a header which is the Intro class, when clicking on the header
 * it will reveal/hide a helpPage div content which is a description of a specific
 * page, basically your expanded tool-tip.

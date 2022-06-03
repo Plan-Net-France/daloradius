@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  *********************************************************************************************************
  * daloRADIUS - RADIUS Web Platform
@@ -32,7 +32,7 @@
 	$idletimeout = "";
 	$ui_changeuserinfo = "0";
 	$bi_changeuserbillinfo = "0";
-	
+
 	$logAction = "";
 	$logDebugSQL = "";
 
@@ -66,7 +66,7 @@
 		isset($_POST['changeuserinfo']) ? $ui_changeuserinfo = $_POST['ui_changeuserinfo'] : $ui_changeuserinfo = "0";
 		isset($_POST['enableUserPortalLogin']) ? $ui_enableUserPortalLogin = $_POST['enableUserPortalLogin'] : $ui_enableUserPortalLogin = "0";
 		isset($_POST['portalLoginPassword']) ? $ui_PortalLoginPassword = $_POST['portalLoginPassword'] : $ui_PortalLoginPassword = "";
-		
+
 	    isset($_POST['bi_contactperson']) ? $bi_contactperson = $_POST['bi_contactperson'] : $bi_contactperson = "";
 	    isset($_POST['bi_company']) ? $bi_company = $_POST['bi_company'] : $bi_company = "";
 	    isset($_POST['bi_email']) ? $bi_email = $_POST['bi_email'] : $bi_email = "";
@@ -85,15 +85,15 @@
 	    isset($_POST['bi_creditcardexp']) ? $bi_creditcardexp = $_POST['bi_creditcardexp'] : $bi_creditcardexp = "";
 	    isset($_POST['bi_notes']) ? $bi_notes = $_POST['bi_notes'] : $bi_notes = "";
 	    isset($_POST['changeUserBillInfo']) ? $bi_changeuserbillinfo = $_POST['changeUserBillInfo'] : $bi_changeuserbillinfo = "0";
-	    
+
 		include 'library/opendb.php';
-		
+
 		$sql = "SELECT * FROM ".$configValues['CONFIG_DB_TBL_RADCHECK']." WHERE UserName='$username'";
 		$res = $dbSocket->query($sql);
 		$logDebugSQL .= $sql . "\n";
 
 		if ($res->numRows() == 0) {
-		
+
 			if (trim($username) != "" and trim($password) != "") {
 
 				$password = $dbSocket->escapeSimple($password);
@@ -119,7 +119,7 @@
 						" ':=', $dbPassword)";
 				$res = $dbSocket->query($sql);
 				$logDebugSQL .= $sql . "\n";
-	
+
 				if ($maxallsession) {
 					$sql = "INSERT INTO ".$configValues['CONFIG_DB_TBL_RADCHECK']." (id,Username,Attribute,op,Value) ".
 							" VALUES (0, '".$dbSocket->escapeSimple($username)."', 'Max-All-Session', ':=', '".
@@ -218,7 +218,7 @@
 		                                " WHERE username='".$dbSocket->escapeSimple($username)."'";
 		                $res = $dbSocket->query($sql);
 		                $logDebugSQL .= $sql . "\n";
-		
+
 		                // if there were no records for this user present in the userbillinfo table
 		                if ($res->numRows() == 0) {
 		                        // insert user billing information table
@@ -251,11 +251,11 @@
 				$failureMsg = "username or password are empty";
 				$logAction .= "Failed adding (possible empty user/pass) new user [$username] on page: ";
 			}
-		} else { 
+		} else {
 			$failureMsg = "user already exist in database: <b> $username </b>";
 			$logAction .= "Failed adding new user already existing in database [$username] on page: ";
 		}
-		
+
 		include 'library/closedb.php';
 
 	}
@@ -266,7 +266,7 @@
 	include_once('library/config_read.php');
     $log = "visited page: ";
 
-	
+
 	if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes")
 		$hiddenPassword = "type=\"password\"";
 
@@ -301,7 +301,7 @@
 <?php
 
 	include ("menu-mng-users.php");
-	
+
 ?>
 
 	<div id="contentnorightbar">
@@ -316,7 +316,7 @@
 		<?php
 			include_once('include/management/actionMessages.php');
 		?>
-		
+
 		<form name="newuser" action="mng-new-quick.php" method="post" >
 <div class="tabber">
 
@@ -326,7 +326,7 @@
 
 			<h302> <?php echo t('title','AccountInfo'); ?> </h302>
 			<br/>
-		
+
 		<ul>
 
 		<li class='fieldset'>
@@ -344,10 +344,10 @@
 
 		<li class='fieldset'>
 		<label for='password' class='form'><?php echo t('all','Password')?></label>
-		<input name='password' type='text' id='password' value='' <?php if (isset($hiddenPassword)) 
+		<input name='password' type='text' id='password' value='' <?php if (isset($hiddenPassword))
 			echo $hiddenPassword ?> tabindex=101 />
-		<input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',8,<?php
-		echo "'".$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS']."'" ?>)" />
+		<input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',16,<?php
+		echo "'".$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2']."'" ?>)" />
 		<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('passwordTooltip')" />
 
 		<div id='passwordTooltip'  style='display:none;visibility:visible' class='ToolTip'>
@@ -371,7 +371,7 @@
 
 		<li class='fieldset'>
 		<label for='group' class='form'><?php echo t('all','Group')?></label>
-		<?php   
+		<?php
 			include_once 'include/management/populate_selectbox.php';
 			populate_groups("Select Groups","groups[]");
 		?>
@@ -394,8 +394,8 @@
 		<li class='fieldset'>
 		<br/>
                 <hr><br/>
-		<input type="submit" name="submit" value="<?php echo t('buttons','apply')?>" 
-			onclick = "javascript:small_window(document.newuser.username.value, 
+		<input type="submit" name="submit" value="<?php echo t('buttons','apply')?>"
+			onclick = "javascript:small_window(document.newuser.username.value,
 			document.newuser.password.value, document.newuser.maxallsession.value);" tabindex=10000 class='button' />
 		</li>
 		</ul>
@@ -416,7 +416,7 @@
 		<input name='framedipaddress' type='text' value='' tabindex=107 />
 		<br/>
 
-		<label for='expiration' class='form'><?php echo t('all','Expiration')?></label>		
+		<label for='expiration' class='form'><?php echo t('all','Expiration')?></label>
 		<input value='' id='expiration' name='expiration'  tabindex=108 />
 		<img src="library/js_date/calendar.gif" onclick="showChooser(this, 'expiration', 'chooserSpan', 1950, <?php echo date('Y', time());?>, 'd M Y', false);">
 		<br/>
@@ -447,7 +447,7 @@
 		</select>
 		<br/>
 
-		<label for='maxallsession' class='form'><?php 
+		<label for='maxallsession' class='form'><?php
 			echo t('all','MaxAllSession') ?></label>
 		<input value='' id='maxallsession' name='maxallsession'  tabindex=111 />
 		<select onChange="javascript:setText(this.id,'maxallsession')" id="option2" class='form' >
@@ -461,7 +461,7 @@
 		</select>
 		<br/>
 
-		<br/>	
+		<br/>
 	</fieldset>
 
 	<div id="chooserSpan" class="dateChooser select-free" style="display: none; visibility: hidden; width: 160px;"></div>

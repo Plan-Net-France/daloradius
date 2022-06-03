@@ -19,10 +19,10 @@
  *
  *********************************************************************************************************
  */
- 
+
     include ("library/checklogin.php");
     $operator = $_SESSION['operator_user'];
-    
+
     include_once("include/management/pages_common.php");
 
 	include('library/check_operator_perm.php');
@@ -33,7 +33,7 @@
 	isset($_POST['profiles']) ? $profiles = $_POST['profiles'] : $profiles = "";
 	isset($_POST['passwordType']) ? $passwordtype = $_POST['passwordType'] : $passwordtype = "";
 	isset($_POST['notificationWelcome']) ? $notificationWelcome = $_POST['notificationWelcome'] : $notificationWelcome = "";
-	
+
 
 	isset($_POST['bi_contactperson']) ? $bi_contactperson = $_POST['bi_contactperson'] : $bi_contactperson = "";
 	isset($_POST['bi_company']) ? $bi_company = $_POST['bi_company'] : $bi_company = "";
@@ -82,7 +82,7 @@
 	isset($_POST['changeUserInfo']) ? $ui_changeuserinfo = $_POST['changeUserInfo'] : $ui_changeuserinfo = "0";
 	isset($_POST['enableUserPortalLogin']) ? $ui_enableUserPortalLogin = $_POST['enableUserPortalLogin'] : $ui_enableUserPortalLogin = "0";
 	isset($_POST['portalLoginPassword']) ? $ui_PortalLoginPassword = $_POST['portalLoginPassword'] : $ui_PortalLoginPassword = "";
-	
+
 	$logAction = "";
 	$logDebugSQL = "";
 
@@ -98,25 +98,25 @@
 				" WHERE plan_name='$planName'";
 		$res = $dbSocket->getCol($sql);
 		// $res is an array of all profiles associated with this plan
-		
+
 		// if the profile list for this plan isn't empty, we associate it with the user
 		if (count($res) != 0) {
-	
+
 			// if profiles are associated with this plan, loop through each and add a usergroup entry for each
 			foreach($res as $profile_name) {
 				$sql = "INSERT INTO ".$configValues['CONFIG_DB_TBL_RADUSERGROUP']." (UserName,GroupName,priority) ".
 					" VALUES ('".$dbSocket->escapeSimple($username)."','$profile_name','0')";
 				$res = $dbSocket->query($sql);
 			}
-			
+
 			return true;
-		
+
 		}
-		
+
 		return false;
 
 	}
-	
+
 
 	function addGroups($dbSocket, $username, $groups) {
 
@@ -139,8 +139,8 @@
 	}
 
 
-	
-	
+
+
 	function addUserInfo($dbSocket, $username) {
 
 		global $firstname;
@@ -243,34 +243,34 @@
 
 		// if there were no records for this user present in the userbillinfo table
 		if ($res->numRows() == 0) {
-			
+
 			// calculate the nextbill and other related billing information
 			$sql = "SELECT * FROM ".$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].
 							" WHERE planName='".$dbSocket->escapeSimple($planName)."' LIMIT 1";
 			$res = $dbSocket->query($sql);
 			$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
 			$logDebugSQL .= $sql . "\n";
-							
+
 			$planRecurring = $row['planRecurring'];
 			$planRecurringPeriod = $row['planRecurringPeriod'];
 			$planRecurringBillingSchedule = $row['planRecurringBillingSchedule'];
-			
-			
+
+
 			// initialize next bill date string (Y-m-d style)
 			$nextBillDate = "0000-00-00";
-			
+
 			// get next billing date
 			if ($planRecurring == "Yes") {
 				$nextBillDate = getNextBillingDate($planRecurringBillingSchedule, $planRecurringPeriod);
 			}
 
-		
+
 			// if $bi_nextbill was not set to anything (empty)
 			if (empty($bi_nextbill))
 				$bi_nextbill = $nextBillDate;
-					
-			
-			
+
+
+
 			// insert user billing information table
 			$sql = "INSERT INTO ".$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO'].
 					" (id, planname, username, contactperson, company, email, phone, ".
@@ -300,22 +300,22 @@
 									"', '$currDate', '$currBy', NULL, NULL)";
 			$res = $dbSocket->query($sql);
 			$logDebugSQL .= $sql . "\n";
-			
+
 			$user_id = $dbSocket->getOne( "SELECT LAST_INSERT_ID() FROM `".$configValues['CONFIG_DB_TBL_DALOUSERBILLINFO']."`" );
 			return $user_id;
-			
+
 		} //FIXME:
 		  //if the user already exist in userinfo then we should somehow alert the user
 		  //that this has happened and the administrator/operator will take care of it
 
 	}
-	
-	
-	
-	
+
+
+
+
 
 	if (isset($_POST["submit"])) {
-		
+
 		include 'library/opendb.php';
 
 		global $username;
@@ -328,7 +328,7 @@
 		$logDebugSQL .= $sql . "\n";
 
 		if ($res->numRows() == 0) {
-			
+
 			if (trim($username) != "" and trim($password) != "") {
 
 				// we need to perform the secure method escapeSimple on $dbPassword early because as seen below
@@ -387,20 +387,20 @@
 				// create any invoices if required (meaning, if a plan was chosen)
 				if ($planName) {
 					include_once("include/management/userBilling.php");
-					
+
 					// get plan information
 					$sql = "SELECT id, planCost, planSetupCost, planTax FROM ".$configValues['CONFIG_DB_TBL_DALOBILLINGPLANS'].
 						" WHERE planName='".$dbSocket->escapeSimple($planName)."' LIMIT 1";
 					$res = $dbSocket->query($sql);
 					$row = $res->fetchRow(DB_FETCHMODE_ASSOC);
 
-					// calculate tax (planTax is the numerical percentage amount) 
+					// calculate tax (planTax is the numerical percentage amount)
 					$calcTax = (float) ($row['planCost'] * (float)($row['planTax'] / 100) );
 					$invoiceItems[0]['plan_id'] = $row['id'];
 					$invoiceItems[0]['amount'] = $row['planCost'];
 					$invoiceItems[0]['tax'] = $calcTax;
 					$invoiceItems[0]['notes'] = 'charge for plan service';
-					
+
 					if (isset($row['planSetupCost']) && ($row['planSetupCost'] != '') ) {
 						$calcTax = (float) ($row['planSetupCost'] * (float)($row['planTax'] / 100) );
 						$invoiceItems[1]['plan_id'] = $row['id'];
@@ -408,28 +408,28 @@
 						$invoiceItems[1]['tax'] = $calcTax;
 						$invoiceItems[1]['notes'] = 'charge for plan setup fee (one time)';
 					}
-										
+
 					userInvoiceAdd($userbillinfo_id, array(), $invoiceItems);
-					
+
 				}
-				
-				
+
+
 				if ($notificationWelcome == 1) {
 					include("include/common/notificationsWelcome.php");
-					
+
 				}
-				
+
 				$successMsg = "Added to database new user: <b> $username </b>";
 				$logAction .= "Successfully added new user [$username] on page: ";
 			} else {
 				$failureMsg = "username or password are empty";
 				$logAction .= "Failed adding (possible empty user/pass) new user [$username] on page: ";
 			}
-		} else { 
+		} else {
 			$failureMsg = "user already exist in database: <b> $username </b>";
 			$logAction .= "Failed adding new user already existing in database [$username] on page: ";
 		}
-	
+
 		include 'library/closedb.php';
 
 	}
@@ -459,18 +459,18 @@
 <?php
 	include_once ("library/tabber/tab-layout.php");
 ?>
- 
+
 <?php
 
 	include ("menu-bill-pos.php");
-	
+
 ?>
 
 <div id="contentnorightbar">
 
 	<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','billposnew.php') ?>
 	<h144>&#x2754;</h144></a></h2>
-	
+
 	<div id="helpPage" style="display:none;visibility:visible" >
 		<?php echo t('helpPage','billposnew') ?>
 		<br/>
@@ -494,7 +494,7 @@
 				<?php
 					include_once('include/management/populate_selectbox.php');
 				?>
-				
+
                 <div id='UserContainer'>
                 <li class='fieldset'>
                 <label for='username' class='form'><?php echo t('all','Username')?></label>
@@ -513,8 +513,8 @@
                 <label for='password' class='form'><?php echo t('all','Password')?></label>
                 <input name='password' type='text' id='password' value=''
                         <?php if (isset($hiddenPassword)) echo $hiddenPassword ?> tabindex=101 />
-                <input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',8,<?php
-				echo "'".$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS']."'" ?>)" />
+                <input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',16,<?php
+				echo "'".$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2']."'" ?>)" />
                 <img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('passwordTooltip')" />
 
                 <div id='passwordTooltip'  style='display:none;visibility:visible' class='ToolTip'>
@@ -531,14 +531,14 @@
                 <?php
                        populate_plans("Select Plan","planName","form");
                 ?>
-		<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('planNameTooltip')" /> 
-		
+		<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('planNameTooltip')" />
+
 		<div id='planNameTooltip'  style='display:none;visibility:visible' class='ToolTip'>
 			<img src='images/icons/comment.png' alt='Tip' border='0' />
 			<?php echo t('Tooltip','planNameTooltip') ?>
 		</div>
 		</li>
-	
+
 
                 <li class='fieldset'>
                 <label for='profile' class='form'><?php echo t('all','Profile')?></label>
@@ -634,11 +634,11 @@
 <?php
 	include('include/config/logging.php');
 ?>
-		
+
 		</div>
-		
+
 		<div id="footer">
-		
+
 <?php
 	include 'page-footer.php';
 ?>

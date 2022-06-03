@@ -21,7 +21,7 @@
  *
  *********************************************************************************************************
  */
- 
+
 $l['all']['daloRADIUS'] = "daloRADIUS " . $configValues['DALORADIUS_VERSION'];
 $l['all']['daloRADIUSVersion'] = "version " . $configValues['DALORADIUS_VERSION'];
 $l['all']['copyright1'] = "RADIUS Management, Reporting, Accounting and Billing by <a href=\"https://github.com/lirantal/daloradius\">Liran Tal</a>";
@@ -334,6 +334,7 @@ $l['all']['CreateRandomUsers'] = "Create Random Users";
 $l['all']['StartingIndex'] = "Starting Index";
 $l['all']['EndingIndex'] = "Ending Index";
 $l['all']['RandomChars'] = "Allowed Random Characters";
+$l['all']['RandomChars2'] = "Allowed Random Characters 2";
 $l['all']['Memfree'] = "Memory Free";
 $l['all']['Uptime'] = "Uptime";
 $l['all']['BandwidthUp'] = "Bandwidth Up";
@@ -604,7 +605,7 @@ $l['FormField']['mngradusergroupdel.php']['ToolTip']['Groupname'] = "If you spec
 
 $l['Tooltip']['usernameTooltip'] = "The exact username as the user<br/>&nbsp;&nbsp;&nbsp;
 					will use to connect to the system";
-$l['Tooltip']['passwordTypeTooltip'] = "The password type used to authenticate the user in Radius.";					
+$l['Tooltip']['passwordTypeTooltip'] = "The password type used to authenticate the user in Radius.";
 $l['Tooltip']['passwordTooltip'] = "Passwords are case sensetive in<br/>&nbsp;&nbsp;&nbsp;
 					certain systems so take extra care";
 $l['Tooltip']['groupTooltip'] = "The user will be added to this group.<br/>&nbsp;&nbsp;&nbsp;
@@ -828,8 +829,8 @@ $l['button']['RemoveOperator'] = "Remove Operator";
 
 $l['button']['ProcessQuery'] = "Process Query";
 
- 
- 
+
+
 /* ********************************************************************************** */
 
 
@@ -853,7 +854,7 @@ $l['title']['Items'] = "Items";
 $l['title']['PayTypeInfo'] = "Payment Type Information";
 $l['title']['PaymentInfo'] = "Payment Information";
 
- 
+
 $l['title']['RateInfo'] = "Rate Information";
 $l['title']['PlanInfo'] = "Plan Information";
 $l['title']['TimeSettings'] = "Time Settings";
@@ -921,7 +922,7 @@ $l['title']['Optional'] = "Optional";
 /* ********************************************************************************** */
 
 /* **********************************************************************************
- * Graphs 
+ * Graphs
  * General graphing text
  ************************************************************************************/
 $l['graphs']['Day'] = "Day";
@@ -956,7 +957,7 @@ $l['text']['LoginPlease'] = "Login Please";
 
 
 /* **********************************************************************************
- * Contact Info 
+ * Contact Info
  * Related to all contact info text, user info, hotspot owner contact information etc
  ************************************************************************************/
 
@@ -1222,7 +1223,7 @@ $l['captions']['detailsofnewrate'] = "You may fill below details for the new rat
 $l['captions']['filldetailsofnewrate'] = "Fill below the details for the new rate entry";
 
 /* **********************************************************************************
- * Help Pages Info 
+ * Help Pages Info
  * Each page has a header which is the Intro class, when clicking on the header
  * it will reveal/hide a helpPage div content which is a description of a specific
  * page, basically your expanded tool-tip.

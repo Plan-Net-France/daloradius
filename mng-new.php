@@ -22,7 +22,7 @@
 
 	include ("library/checklogin.php");
 	$operator = $_SESSION['operator_user'];
-	
+
 	include('library/check_operator_perm.php');
 
 	// declaring variables
@@ -90,11 +90,11 @@
 	isset($_POST['zip']) ? $ui_zip = $_POST['zip'] : $ui_zip = "";
 	isset($_POST['notes']) ? $notes = $_POST['notes'] : $notes = "";
 	isset($_POST['changeUserInfo']) ? $ui_changeuserinfo = $_POST['changeUserInfo'] : $ui_changeuserinfo = "0";
-	
+
 	isset($_POST['enableUserPortalLogin']) ? $ui_enableUserPortalLogin = $_POST['enableUserPortalLogin'] : $ui_enableUserPortalLogin = "0";
 	isset($_POST['portalLoginPassword']) ? $ui_PortalLoginPassword = $_POST['portalLoginPassword'] : $ui_PortalLoginPassword = "";
-	
-	isset($_POST['dictAttributes']) ? $dictAttributes = $_POST['dictAttributes'] : $dictAttributes = "";		
+
+	isset($_POST['dictAttributes']) ? $dictAttributes = $_POST['dictAttributes'] : $dictAttributes = "";
 
 
 	function addGroups($dbSocket, $username, $groups) {
@@ -137,7 +137,7 @@
 		global $ui_changeuserinfo;
 		global $ui_PortalLoginPassword;
 		global $ui_enableUserPortalLogin;
-		
+
 		global $logDebugSQL;
 		global $configValues;
 
@@ -258,11 +258,11 @@
 
 
 	function addAttributes($dbSocket, $username) {
-		
+
 		global $logDebugSQL;
 		global $configValues;
 
-		foreach($_POST as $element=>$field) { 
+		foreach($_POST as $element=>$field) {
 
 			// switch case to rise the flag for several $attribute which we do not
 			// wish to process (ie: do any sql related stuff in the db)
@@ -331,7 +331,7 @@
 								// code block
 					break;
 			}
-	
+
 			if ($skipLoopFlag == 1) {
 				$skipLoopFlag = 0;              // resetting the loop flag
 				continue;
@@ -353,7 +353,7 @@
 
 			if ( (isset($field)) && (!isset($field[1])) )
 				continue;
-	
+
 			$sql = "INSERT INTO $table (id,Username,Attribute,op,Value) ".
 					" VALUES (0, '".$dbSocket->escapeSimple($username)."', '".
 					$dbSocket->escapeSimple($attribute)."', '".$dbSocket->escapeSimple($op)."', '".
@@ -414,7 +414,7 @@
 						default:
 							$dbPassword = "'$password'";
 					}
-					
+
 					// at this stage $dbPassword contains the password string encapsulated by '' and either uses
 					// a function to encrypt it like ENCRYPT or it doesn't, it's based on the configuration
 					// but here we provide another stage, for Crypt-Password and MD5-Password it's obvious
@@ -428,7 +428,7 @@
 						if (!(preg_match("/encrypt/i",$dbPassword))) {
 							$dbPassword = "ENCRYPT('$password', 'SALT_DALORADIUS')";
 						}
-				
+
 						// we now perform the same check but for an MD5-Password attribute
 					} elseif (preg_match("/md5/i", $passwordtype)) {
 						// if we don't find the md5 function even though we identified
@@ -444,7 +444,7 @@
 							"', ':=', $dbPassword)";
 					$res = $dbSocket->query($sql);
 					$logDebugSQL .= $sql . "\n";
-					
+
 					addGroups($dbSocket, $username, $groups);
 					addUserInfo($dbSocket, $username);
 					addUserBillInfo($dbSocket, $username);
@@ -460,9 +460,9 @@
 				}
 
 		   } elseif ($authType == "macAuth") {
-			    
+
 				$macaddress = trim($macaddress);
-				
+
 				if (filter_var($macaddress, FILTER_VALIDATE_MAC)) {
 
 					// insert username/password
@@ -470,7 +470,7 @@
 						" VALUES (0, '".$dbSocket->escapeSimple($macaddress)."', 'Auth-Type', ':=', 'Accept')";
 					$res = $dbSocket->query($sql);
 					$logDebugSQL .= $sql . "\n";
-				
+
 					addGroups($dbSocket, $macaddress, $group_macaddress);
 					addUserInfo($dbSocket, $macaddress);
                                 	addUserBillInfo($dbSocket, $username);
@@ -478,7 +478,7 @@
 
 					$successMsg = "Added to database new mac auth user: <b> $macaddress </b>";
 					$logAction .= "Successfully added new mac auth user [$macaddress] on page: ";
-				} else { 
+				} else {
 					$failureMsg = "Invalid Mac address format: <b> $username </b>";
 					$logAction .= "Failed adding new user invalid mac address format [$username] on page: ";
 				}
@@ -503,11 +503,11 @@
 				echo "unknown authentication method <br/>";
 		   }
 
-		} else { 
+		} else {
 			$failureMsg = "user already exist in database: <b> $username </b>";
 			$logAction .= "Failed adding new user already existing in database [$username] on page: ";
 		}
-		
+
 		include 'library/closedb.php';
 
 	}
@@ -520,7 +520,7 @@
 
 	if ($configValues['CONFIG_IFACE_PASSWORD_HIDDEN'] == "yes")
 		$hiddenPassword = "type=\"password\"";
-	
+
 ?>
 
 
@@ -536,7 +536,7 @@
 <link rel="stylesheet" type="text/css" href="library/js_date/select-free.css"/>
 <![endif]-->
 </head>
- 
+
 <script src="library/js_date/date-functions.js" type="text/javascript"></script>
 <script src="library/js_date/datechooser.js" type="text/javascript"></script>
 <script src="library/javascript/pages_common.js" type="text/javascript"></script>
@@ -547,7 +547,7 @@
 <script type="text/javascript" src="library/javascript/ajaxGeneric.js"></script>
 
 
- 
+
 <?php
 	include_once ("library/tabber/tab-layout.php");
 ?>
@@ -559,7 +559,7 @@
 
 		<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','mngnew.php') ?>
 		<h144>&#x2754;</h144></a></h2>
-		
+
 		<div id="helpPage" style="display:none;visibility:visible" >
 			<?php echo t('helpPage','mngnew') ?>
 			<br/>
@@ -567,7 +567,7 @@
 		<?php
 			include_once('include/management/actionMessages.php');
 		?>
-		
+
 		<form name="newuser" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
 <div class="tabber">
@@ -590,7 +590,7 @@
 		<input name='username' type='text' id='username' value='' tabindex=100 />
 		<input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('username',8,<?php
 		echo "'".$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS']."'" ?>)" />
-		<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('usernameTooltip')" /> 
+		<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('usernameTooltip')" />
 
 		<div id='usernameTooltip'  style='display:none;visibility:visible' class='ToolTip'>
 			<img src='images/icons/comment.png' alt='Tip' border='0' />
@@ -600,14 +600,14 @@
 
 		<li class='fieldset'>
 		<label for='password' class='form'><?php echo t('all','Password')?></label>
-		<input name='password' type='text' id='password' value='' 
+		<input name='password' type='text' id='password' value=''
 			<?php if (isset($hiddenPassword)) echo $hiddenPassword ?> tabindex=101 />
-		<input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',8,<?php
-		echo "'".$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS']."'" ?>)" />
+		<input type='button' value='Random' class='button' onclick="javascript:randomAlphanumeric('password',16,<?php
+		echo "'".$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2']."'" ?>)" />
 		<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('passwordTooltip')" />
 
 		<div id='passwordTooltip'  style='display:none;visibility:visible' class='ToolTip'>
-			<img src='images/icons/comment.png' alt='Tip' border='0' /> 
+			<img src='images/icons/comment.png' alt='Tip' border='0' />
 			<?php echo t('Tooltip','passwordTooltip') ?>
 		</div>
 		</li>
@@ -629,7 +629,7 @@
 
 		<li class='fieldset'>
 		<label for='group' class='form'><?php echo t('all','Group')?></label>
-		<?php   
+		<?php
 			include_once 'include/management/populate_selectbox.php';
 			populate_groups("Select Groups","groups[]");
 		?>
@@ -644,7 +644,7 @@
 
 
 		<div id='groupTooltip'  style='display:none;visibility:visible' class='ToolTip'>
-			<img src='images/icons/comment.png' alt='Tip' border='0' /> 
+			<img src='images/icons/comment.png' alt='Tip' border='0' />
 			<?php echo t('Tooltip','groupTooltip') ?>
 		</div>
 		</li>
@@ -686,7 +686,7 @@
 
 		<li class='fieldset'>
 		<label for='group' class='form'><?php echo t('all','Group')?></label>
-		<?php   
+		<?php
 			include_once 'include/management/populate_selectbox.php';
 			populate_groups("Select Groups", "group_macaddress[]", "form", "disabled");
 		?>
@@ -726,8 +726,8 @@
 		<label for='pincode' class='form'><?php echo t('all','PINCode')?></label>
 		<input name='pincode' type='text' id='pincode' value='' tabindex=106 disabled />
 		<input type='button' value='Generate' class='button' onclick="javascript:randomAlphanumeric('pincode',10)" />
-		<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('pincodeTooltip')" />		
-		
+		<img src='images/icons/comment.png' alt='Tip' border='0' onClick="javascript:toggleShowDiv('pincodeTooltip')" />
+
 		<div id='pincodeTooltip'  style='display:none;visibility:visible' class='ToolTip'>
 			<img src='images/icons/comment.png' alt='Tip' border='0' />
 			<?php echo t('Tooltip','pincodeTooltip') ?>
@@ -736,7 +736,7 @@
 
 		<li class='fieldset'>
 		<label for='group' class='form'><?php echo t('all','Group')?></label>
-		<?php   
+		<?php
 			include_once 'include/management/populate_selectbox.php';
 			populate_groups("Select Groups", "group_pincode[]", "form", "disabled");
 		?>
@@ -781,8 +781,8 @@
 	<?php
 		include_once('include/management/attributes.php');
 	?>
-	</div>	
-	
+	</div>
+
 
 </div>
 
@@ -795,16 +795,16 @@
 ?>
 
 		</div>
-	
+
 		<div id="footer">
-	
+
 <?php
 	include 'page-footer.php';
 ?>
 
-	
+
 		</div>
-	
+
 </div>
 </div>
 

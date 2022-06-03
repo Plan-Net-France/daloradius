@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators DROP COLUMN rep_username;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -79,7 +79,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD acct_custom_query VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -87,10 +87,10 @@ if (isset($_POST['submit'])) {
 			$sql = "UPDATE operators SET acct_custom_query='yes' WHERE username='administrator';";
 			$res = $dbSocket->query($sql);
 		}
-	
+
 		$sql = "ALTER TABLE operators ADD config_maint_disconnect_user VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
 			$sql = "UPDATE operators SET config_maint_disconnect_user='yes' WHERE username='administrator';";
 			$res = $dbSocket->query($sql);
 		}
-	
+
                 /* Ending set of SQL entries */
                 $databaseVersion = "0.9-5";
         } // 0.9-4
@@ -110,7 +110,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_profiles_edit VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -119,7 +119,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_profiles_list VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_profiles_del VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -138,7 +138,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_groupcheck_search VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -149,7 +149,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_groupreply_search VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -161,7 +161,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators CHANGE rep_stat_radius rep_stat_services VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -170,7 +170,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE userinfo ADD creationdate DATETIME;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -180,7 +180,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators CHANGE lastlogin lastlogin DATETIME;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -189,7 +189,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD creationdate DATETIME;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -213,7 +213,7 @@ if (isset($_POST['submit'])) {
 				);
 			";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -249,7 +249,7 @@ if (isset($_POST['submit'])) {
 					);
 				";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -271,7 +271,7 @@ if (isset($_POST['submit'])) {
 					)
 				";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -279,7 +279,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_attributes_list VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -290,7 +290,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_attributes_new VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -300,7 +300,7 @@ if (isset($_POST['submit'])) {
 		}
 		$sql = "ALTER TABLE operators ADD mng_rad_attributes_edit VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -311,7 +311,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_attributes_search VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -322,7 +322,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_attributes_del VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -333,7 +333,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_realms_list VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -344,7 +344,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_realms_new VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -355,7 +355,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_realms_edit VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -366,7 +366,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_realms_del VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -377,7 +377,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_proxys_list VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -388,7 +388,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_proxys_new VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -399,7 +399,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_proxys_edit VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -410,7 +410,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_proxys_del VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -421,7 +421,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD acct_maintenance_cleanup VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -432,7 +432,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD acct_maintenance_delete VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -443,7 +443,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD rep_history VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -459,7 +459,7 @@ if (isset($_POST['submit'])) {
 					ALTER TABLE hotspots ADD companyphone VARCHAR(32) AFTER companycontact;
 				";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -472,7 +472,7 @@ if (isset($_POST['submit'])) {
 					ALTER TABLE hotspots ADD updateby VARCHAR(128) AFTER updatedate;
 				";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -484,7 +484,7 @@ if (isset($_POST['submit'])) {
 					ALTER TABLE userinfo ADD updateby VARCHAR(128) AFTER updatedate;
 				";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -496,7 +496,7 @@ if (isset($_POST['submit'])) {
 					ALTER TABLE operators ADD updateby VARCHAR(128) AFTER updatedate;
 			";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -504,7 +504,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_ippool_list VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -515,7 +515,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_ippool_new VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -526,7 +526,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_ippool_edit VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -537,7 +537,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_ippool_del VARCHAR(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -549,15 +549,15 @@ if (isset($_POST['submit'])) {
 		/* Ending set of SQL entries */
 		$databaseVersion = "0.9-7";
 	} // 0.9-6
-	
+
 	/* perform conversion procedure to upgrade to version 0.9-7 of the database schema */
 	if ($databaseVersion == "0.9-7") {
 
 		/* Begining set of SQL entries */
-	
+
 		$sql = "ALTER TABLE userinfo ADD changeuserinfo VARCHAR(128) AFTER notes;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -566,7 +566,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_profiles_duplicate VARCHAR(32) AFTER mng_rad_profiles_edit;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -578,7 +578,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD mng_rad_attributes_import VARCHAR(32) AFTER mng_rad_attributes_del;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -591,7 +591,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD config_backup_createbackups VARCHAR(32) AFTER config_operators_new;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -603,7 +603,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD config_backup_managebackups VARCHAR(32) AFTER config_backup_createbackups;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -615,7 +615,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE userinfo ADD address VARCHAR(200) AFTER mobilephone;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -623,7 +623,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE userinfo ADD city VARCHAR(200) AFTER address;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -631,7 +631,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE userinfo ADD state VARCHAR(200) AFTER city;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -639,7 +639,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE userinfo ADD zip VARCHAR(200) AFTER state;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -648,7 +648,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators DROP COLUMN bill_prepaid;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -657,7 +657,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators CHANGE bill_persecond bill_rates_date varchar(32);";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -679,7 +679,7 @@ if (isset($_POST['submit'])) {
 					);
 				";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -687,7 +687,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_paypal_transactions VARCHAR(32) AFTER bill_rates_list;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -699,7 +699,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_plans_list VARCHAR(32) AFTER bill_paypal_transactions;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -711,7 +711,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_plans_new VARCHAR(32) AFTER bill_plans_list;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -723,7 +723,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_plans_edit VARCHAR(32) AFTER bill_plans_new;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -735,7 +735,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_plans_del VARCHAR(32) AFTER bill_plans_edit;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -776,7 +776,7 @@ if (isset($_POST['submit'])) {
 					);
 				";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -818,7 +818,7 @@ if (isset($_POST['submit'])) {
 					);
 				";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -866,7 +866,7 @@ if (isset($_POST['submit'])) {
 				";
 
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -875,7 +875,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_pos_list VARCHAR(32) AFTER bill_rates_list;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -887,7 +887,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_pos_new VARCHAR(32) AFTER bill_pos_list;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -899,7 +899,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_pos_edit VARCHAR(32) AFTER bill_pos_new;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -911,7 +911,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_pos_del VARCHAR(32) AFTER bill_pos_edit;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -951,7 +951,7 @@ if (isset($_POST['submit'])) {
 
 
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -960,7 +960,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "ALTER TABLE operators ADD bill_history_query VARCHAR(32) AFTER bill_plans_list;";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -999,13 +999,13 @@ if (isset($_POST['submit'])) {
 		$databaseVersion = "0.9-8";
 	} // 0.9-7
 
-	
-	
+
+
 	/* perform conversion procedure to upgrade to version 0.9-9 of the database schema */
 	if ($databaseVersion == "0.9-8") {
 
 		/* Begining set of SQL entries */
-	
+
 		$sql = "
 		DROP TABLE IF EXISTS `billing_merchant`;
 		CREATE TABLE `billing_merchant` (
@@ -1051,12 +1051,12 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-	
+
 		$sql = "
 		DROP TABLE IF EXISTS `operators`;
 		CREATE TABLE `operators` (
@@ -1085,7 +1085,7 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -1098,7 +1098,7 @@ if (isset($_POST['submit'])) {
 			UNLOCK TABLES;
 			/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 			";
-			$res = $dbSocket->query($sql);			
+			$res = $dbSocket->query($sql);
 		}
 
 		$sql = "
@@ -1112,7 +1112,7 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -1127,7 +1127,7 @@ if (isset($_POST['submit'])) {
 			";
 			$res = $dbSocket->query($sql);
 		}
-		
+
 		$sql = "
 		DROP TABLE IF EXISTS `operators_acl_files`;
 		CREATE TABLE `operators_acl_files` (
@@ -1139,7 +1139,7 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=114 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -1154,7 +1154,7 @@ if (isset($_POST['submit'])) {
 			";
 			$res = $dbSocket->query($sql);
 		}
-		
+
 		$sql = "
 				INSERT INTO `operators_acl_files` VALUES (0,'mng_rad_hunt_del','Management','HuntGroups'),(0,'mng_rad_hunt_edit','Management','HuntGroups'),(0,'mng_rad_hunt_list','Management','HuntGroups'),(0,'mng_rad_hunt_new','Management','HuntGroups');
 				INSERT INTO `operators_acl` VALUES (0,1,'mng_rad_hunt_del',1),(0,1,'mng_rad_hunt_edit',1),(0,1,'mng_rad_hunt_list',1),(0,1,'mng_rad_hunt_new',1);
@@ -1163,12 +1163,12 @@ if (isset($_POST['submit'])) {
 				INSERT INTO `operators_acl` VALUES (0,1,'config_mail',1);
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		CREATE TABLE IF NOT EXISTS `node` (
 		
@@ -1251,12 +1251,12 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='node database' AUTO_INCREMENT=1 ;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		DROP TABLE IF EXISTS `billing_plans`;
 		CREATE TABLE `billing_plans` (
@@ -1291,12 +1291,12 @@ if (isset($_POST['submit'])) {
 				
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		ALTER TABLE userbillinfo ADD hotspot_id int(32) AFTER planName;
 		ALTER TABLE userbillinfo ADD batch_id int(32) AFTER emailinvoice;
@@ -1312,12 +1312,12 @@ if (isset($_POST['submit'])) {
 		ALTER TABLE userinfo ADD portalloginpassword varchar(128) DEFAULT '' AFTER changeuserinfo;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		DROP TABLE IF EXISTS `batch_history`;
 		CREATE TABLE `batch_history` (
@@ -1337,7 +1337,7 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -1348,7 +1348,7 @@ if (isset($_POST['submit'])) {
 			";
 			$res = $dbSocket->query($sql);
 		}
-		
+
 		$sql = "
 		DROP TABLE IF EXISTS `billing_plans_profiles`;
 		CREATE TABLE `billing_plans_profiles` (
@@ -1360,12 +1360,12 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		DROP TABLE IF EXISTS `invoice`;
 		CREATE TABLE `invoice` (
@@ -1386,7 +1386,7 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -1401,7 +1401,7 @@ if (isset($_POST['submit'])) {
 				";
 			$res = $dbSocket->query($sql);
 		}
-		
+
 		$sql = "
 		DROP TABLE IF EXISTS `invoice_items`;
 		CREATE TABLE `invoice_items` (
@@ -1425,12 +1425,12 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		DROP TABLE IF EXISTS `invoice_status`;
 		CREATE TABLE `invoice_status` (
@@ -1447,7 +1447,7 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -1463,7 +1463,7 @@ if (isset($_POST['submit'])) {
 			";
 			$res = $dbSocket->query($sql);
 		}
-		
+
 		$sql = "
 		DROP TABLE IF EXISTS `invoice_type`;
 		CREATE TABLE `invoice_type` (
@@ -1480,7 +1480,7 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -1493,7 +1493,7 @@ if (isset($_POST['submit'])) {
 			";
 			$res = $dbSocket->query($sql);
 		}
-		
+
 		$sql = "
 		DROP TABLE IF EXISTS `payment`;
 		CREATE TABLE `payment` (
@@ -1513,12 +1513,12 @@ if (isset($_POST['submit'])) {
 		) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 			DROP TABLE IF EXISTS `payment_type`;
 			CREATE TABLE `payment_type` (
@@ -1535,7 +1535,7 @@ if (isset($_POST['submit'])) {
 			) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -1563,9 +1563,9 @@ if (isset($_POST['submit'])) {
 			";
 			$res = $dbSocket->query($sql);
 		}
-		
 
-		
+
+
 		$sql = "
 		-- Adding ACL for the new New Users reports page
 			INSERT INTO `operators_acl_files` (`file`, `category`, `section`) VALUES
@@ -1574,12 +1574,12 @@ if (isset($_POST['submit'])) {
 			(0,1,'rep_newusers',1);
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		-- Adding ACL for the new New Users reports page
 		INSERT INTO `operators_acl_files` (`file`, `category`, `section`) VALUES
@@ -1594,23 +1594,23 @@ if (isset($_POST['submit'])) {
 		(0,1,'config_reports_dashboard',1);
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		-- Adding new custom daloRADIUS groups
 		INSERT IGNORE INTO `radgroupcheck` (Groupname,Attribute,Op,Value) VALUES ('daloRADIUS-Disabled-Users','Auth-Type', ':=', 'Reject');
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		-- Adding ACL for Reports->Status->UPS page
 		INSERT INTO `operators_acl_files` (`file`, `category`, `section`) VALUES
@@ -1631,12 +1631,12 @@ if (isset($_POST['submit'])) {
 		(0,1,'rep_stat_cron',1);
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
 		}
-		
+
 		$sql = "
 		ALTER TABLE userbillinfo ADD country varchar(100) AFTER state;
 		ALTER TABLE userinfo ADD country varchar(100) AFTER state;
@@ -1645,7 +1645,7 @@ if (isset($_POST['submit'])) {
 				
 		";
 		$res = $dbSocket->query($sql);
-	
+
 		if (DB::isError($res)) {
 			$errorMsg = $res->getMessage() ." ". $res->getDebugInfo();
 			array_push($upgradeErrors, $errorMsg);
@@ -1654,18 +1654,18 @@ if (isset($_POST['submit'])) {
 		/* Ending set of SQL entries */
 
 		/* We continue to also upgrade the configuration parameters for 0.9-8 */
-		
+
 		$configValues['DALORADIUS_VERSION'] = '0.9-9';
-		
+
 		$configValues['CONFIG_DB_TBL_RADUSERGROUP'] = 'radusergroup';
 		$configValues['CONFIG_DB_TBL_RADHG'] = 'radhuntgroup';
 		$configValues['CONFIG_DB_TBL_RADPOSTAUTH'] = 'radpostauth';
-		$configValues['CONFIG_DB_TBL_RADIPPOOL'] = 'radippool';	
-		
+		$configValues['CONFIG_DB_TBL_RADIPPOOL'] = 'radippool';
+
 		$configValues['CONFIG_DB_TBL_DALOOPERATORS'] = 'operators';
 		$configValues['CONFIG_DB_TBL_DALOOPERATORS_ACL'] = 'operators_acl';
 		$configValues['CONFIG_DB_TBL_DALOOPERATORS_ACL_FILES'] = 'operators_acl_files';
-		
+
 		$configValues['CONFIG_DB_TBL_DALOBATCHHISTORY'] = 'batch_history';
 		$configValues['CONFIG_DB_TBL_DALOBILLINGPLANSPROFILES'] = 'billing_plans_profiles';
 		$configValues['CONFIG_DB_TBL_DALOBILLINGINVOICE'] = 'invoice';
@@ -1675,7 +1675,7 @@ if (isset($_POST['submit'])) {
 		$configValues['CONFIG_DB_TBL_DALOPAYMENTS'] = 'payment';
 		$configValues['CONFIG_DB_TBL_DALOPAYMENTTYPES'] = 'payment_type';
 		$configValues['CONFIG_DB_TBL_DALONODE'] = 'node';
-		
+
 		$configValues['CONFIG_MAIL_SMTPADDR'] = '127.0.0.1';
 		$configValues['CONFIG_MAIL_SMTPPORT'] = '25';
 		$configValues['CONFIG_MAIL_SMTPAUTH'] = '';
@@ -1684,17 +1684,17 @@ if (isset($_POST['submit'])) {
 		$configValues['CONFIG_DASHBOARD_DALO_DEBUG'] = '1';
 		$configValues['CONFIG_DASHBOARD_DALO_DELAYSOFT'] = '5';
 		$configValues['CONFIG_DASHBOARD_DALO_DELAYHARD'] = '15';
-		
-		
+
+
 			/* Ending configuration parameters upgrade */
 
 		$databaseVersion = "0.9-9";
 	} // 0.9-8
-	
+
 	include 'library/closedb.php';
 
 
-	
+
 	/* if this is an upgrade from a previous version like 0.9-7 then there is no daloradius.conf.php
 	   file created and so we need to create one... */
 
@@ -1760,6 +1760,7 @@ if (isset($_POST['submit'])) {
 		$configValues['CONFIG_MAINT_TEST_USER_NASPORT'] = '0';
 		$configValues['CONFIG_MAINT_TEST_USER_RADIUSSECRET'] = 'testing123';
 		$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] = 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789';
+		$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2'] = 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789!@#$%^&*';
 		$configValues['CONFIG_MAIL_SMTPADDR'] = '127.0.0.1';
 		$configValues['CONFIG_MAIL_SMTPPORT'] = '25';
 		$configValues['CONFIG_MAIL_SMTPAUTH'] = '';
@@ -1771,14 +1772,14 @@ if (isset($_POST['submit'])) {
 		$configValues['CONFIG_MAIL_SMTP_FROMEMAIL'] = '';
 	}
 
-	
+
 	$configValues['DALORADIUS_VERSION'] = $databaseVersion;		// after finishing with upgrade, update the daloRADIUS version parameter in library/daloradius.conf.php
 	include ("library/config_write.php");						// save the new database version for daloRADIUS in the config file.
 
 	$updateStatus = "true";
 	$successMsg .= "<br/>Finished upgrade procedure to version $databaseVersion.
 			<br/><br/><a href='index.php'>Return</a> to daloRADIUS Platform login.";
-	
+
 	// append to the failureMsg variable all the errors which took place during the database queries.
 	// the failureMsg variable is then echo'ed while in the div element for the action Messages
 	foreach($upgradeErrors as $error) {
@@ -1812,12 +1813,12 @@ if (isset($_POST['submit'])) {
 
 <div id="wrapper">
 <div id="innerwrapper">
-		
+
                 <div id="header">
 
                                 <h1><a href="index.php"> <img src="images/daloradius_small.png" border=0/></a></h1>
                                 <h2>
-                                	Radius Management, Reporting and Accounting by <a href="https://github.com/lirantal/daloradius">Liran Tal</a>                                
+                                	Radius Management, Reporting and Accounting by <a href="https://github.com/lirantal/daloradius">Liran Tal</a>
                                 </h2>
                                 <ul id="nav">
 				<a name='top'></a>
@@ -1829,10 +1830,10 @@ if (isset($_POST['submit'])) {
                                                 <li>daloRADIUS Update/Upgrade</li><br/>
 					</div>
                                 </ul>
-								
+
                 </div>
 
-      
+
 
 <div id="sidebar">
 
@@ -1846,7 +1847,7 @@ if (isset($_POST['submit'])) {
 		<li><a href="update.php"><b>&raquo;</b>Update</a></li>
 
 	</ul>
-	
+
 	<h3>Support</h3>
 
 	<p class="news">
@@ -1859,11 +1860,11 @@ if (isset($_POST['submit'])) {
 
 </div>
 
-		
-		
-		
+
+
+
 <div id="contentnorightbar">
-		
+
 	<h2 id="Intro"><a href="#"></a></h2>
 	<center>
 		<h2> daloRADIUS Platform - Update </h2>
@@ -1877,7 +1878,7 @@ if (isset($_POST['submit'])) {
 
 
 <?php if ((isset($updateStatus)) && ($updateStatus == "true")): ?>
-	
+
 <?php else: ?>
 
 <form name="update" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -1927,13 +1928,13 @@ if (isset($_POST['submit'])) {
 			<font color="red"><b>Not-installed</b></font>
 		<?php endif; ?>
 		<br/>
-		</li>	
+		</li>
 
 
                 </ul>
         </fieldset>
 
-		
+
         <fieldset>
 
                 <h302> Update </h302>
@@ -1944,7 +1945,7 @@ if (isset($_POST['submit'])) {
                 <li class='fieldset'>
                 <label for='name' class='form'>
 
-	<?php 
+	<?php
 		/*
 		if (isset($missingVersion)) {
 			$option = "<option value=\"\">Please select</option>";
@@ -1976,7 +1977,7 @@ if (isset($_POST['submit'])) {
 	</select>
 
 		<br/>
-	
+
                 <li class='fieldset'>
                 <br/>
                 <hr><br/>
@@ -1988,15 +1989,15 @@ if (isset($_POST['submit'])) {
 
 </form>
 
-<?php endif; ?>	
+<?php endif; ?>
 
 
 </div>
-		
+
 
 <div id="footer">
-		
-								
+
+
 
 <?php
 echo "
@@ -2009,9 +2010,9 @@ echo "
 
 <br />
 </p>
-		
+
 		</div>
-		
+
 </div>
 </div>
 

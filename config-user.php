@@ -39,17 +39,23 @@
 			$config_user_allowedrandomchars = str_replace('"', '', $config_user_allowedrandomchars);
 			$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS'] = $config_user_allowedrandomchars;
 		}
-		
+
+		if (isset($_REQUEST['config_user_allowedrandomchars2'])) {
+			$config_user_allowedrandomchars2 = str_replace('\'', '', $_REQUEST['config_user_allowedrandomchars2']);
+			$config_user_allowedrandomchars2 = str_replace('"', '', $config_user_allowedrandomchars2);
+			$configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2'] = $config_user_allowedrandomchars2;
+		}
+
 		// this should probably move to some other page at some point
 		if (isset($_REQUEST['config_db_pass_encrypt']))
 			$configValues['CONFIG_DB_PASSWORD_ENCRYPTION'] = $_REQUEST['config_db_pass_encrypt'];
-		
-        include ("library/config_write.php");
-    }	
 
-	
-?>		
-		
+        include ("library/config_write.php");
+    }
+
+
+?>
+
 <?php
     include ("menu-config.php");
 ?>
@@ -57,10 +63,10 @@
 <?php
         include_once ("library/tabber/tab-layout.php");
 ?>
-		
-			
+
+
 		<div id="contentnorightbar">
-		
+
 				<h2 id="Intro"><a href="#" onclick="javascript:toggleShowDiv('helpPage')"><?php echo t('Intro','configuser.php'); ?>
 				<h144>&#x2754;</h144></a></h2>
 
@@ -95,11 +101,15 @@
 			<option value="md5">md5</option>
 		</select>
 		</li>
-		
+
 
 		<li class='fieldset'>
 		<label for='config_user_allowedrandomchars' class='form'><?php echo t('all','RandomChars') ?></label>
 		<input type='text' value="<?php echo htmlentities($configValues['CONFIG_USER_ALLOWEDRANDOMCHARS']) ?>" name="config_user_allowedrandomchars" />
+		</li>
+		<li class='fieldset'>
+		<label for='config_user_allowedrandomchars2' class='form'><?php echo t('all','RandomChars2') ?></label>
+		<input type='text' value="<?php echo htmlentities($configValues['CONFIG_USER_ALLOWEDRANDOMCHARS2']) ?>" name="config_user_allowedrandomchars2" />
 		</li>
 
 
@@ -113,7 +123,7 @@
 		</li>
 
 		</ul>
-	
+
 	</fieldset>
 
 	</div>
@@ -123,7 +133,7 @@
 
 				</form>
 
-	
+
 				<br/><br/>
 
 
@@ -132,15 +142,15 @@
 
 
 		</div>
-		
+
 		<div id="footer">
-		
+
 <?php
         include 'page-footer.php';
 ?>
-		
+
 		</div>
-		
+
 </div>
 </div>
 
