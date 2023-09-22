@@ -43,10 +43,13 @@ if (!array_key_exists('daloradius_logged_in', $_SESSION) || $_SESSION['daloradiu
 
     // we try to detect if there are extra directories
     // in between the root and the requested file
-    $extra_directory = str_replace($_SERVER['DOCUMENT_ROOT'], "", $my_document_root);
+    $extra_directory = str_replace($_SERVER['CONTEXT_DOCUMENT_ROOT'] ?? $_SERVER['DOCUMENT_ROOT'], "", $my_document_root);
 
     // we strip out this extra directory from the requested file
     $my_php_self = str_replace($extra_directory, "", $_SERVER['PHP_SELF']);
+    if (isset($_SERVER['CONTEXT_PREFIX']) && strpos($my_php_self, $_SERVER['CONTEXT_PREFIX']) === 0) {
+        $my_php_self = substr($my_php_self, strlen($_SERVER['CONTEXT_PREFIX']));
+    }
 
     // we implement a sort of "dynamic redirect finder" based on the number of "/" found in our "php_self" value
     $count = substr_count($my_php_self, "/", 1);
